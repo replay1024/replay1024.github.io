@@ -28,6 +28,7 @@ button { font: inherit; }
 .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .loader-inner { text-align: center; padding: 24px; animation: float 2.8s ease-in-out infinite; }
 .loader-heart { color: #e99bb4; font-size: 56px; display: inline-block; animation: heartbeat 1.2s ease-in-out infinite; filter: drop-shadow(0 5px 10px #e99bb455); }
+.loader-heart { color: #ef9eb8; }
 .loader-title { margin: 14px 0 8px; font-family: var(--site-font-heading); font-size: 24px; letter-spacing: 4px; color: #a96f82; }
 .loader-sub { font-size: 12px; letter-spacing: 3px; color: #c6a0a7; }
 .loader-track { width: 180px; height: 3px; margin: 22px auto 0; border-radius: 8px; overflow: hidden; background: #f4dce1; }
@@ -144,7 +145,7 @@ h1 span { color: #d982a0; }
 <div id="app">
   <div class="loader" id="loader" aria-label="正在准备祝福">
     <div class="loader-inner">
-      <div class="loader-heart">♥</div>
+      <div class="loader-heart">♡</div>
       <div class="loader-title">正在为公主准备惊喜</div>
       <div class="loader-sub">A LITTLE GIFT FULL OF LOVE</div>
       <div class="loader-track"><div class="loader-progress"></div></div>
@@ -195,6 +196,7 @@ h1 span { color: #d982a0; }
     </div>
     <div class="actions">
       <button class="btn" id="heartBtn">♡ 收下一颗爱心</button>
+      <button class="btn primary" id="fireworksBtn" type="button">🎆 放一场烟花</button>
       <button class="btn" id="musicBtn" aria-pressed="false">♫ 打开浪漫氛围</button>
     </div>
     <div class="footer">MADE WITH LOVE · FOR MY PRINCESS</div>
@@ -313,6 +315,15 @@ h1 span { color: #d982a0; }
     burst(w*.5, h*.43, 64);
     showToast('把今天的好运和快乐，都送给你 ♥');
   });
+  document.getElementById('fireworksBtn').addEventListener('click', () => {
+    if (!main.classList.contains('ready')) return;
+    const mobile = window.innerWidth <= 560;
+    const count = mobile ? 4 : 7;
+    for (let i = 0; i < count; i++) {
+      window.setTimeout(() => launchFirework(), i * (mobile ? 240 : 190));
+    }
+    showToast('为公主放一场烟花，愿每个愿望都闪闪发光！🎆');
+  });
   // A small, original ambient tone made with the browser audio API; no external audio is loaded.
   let audioCtx = null, melodyTimer = null, noteIndex = 0;
   const notes = [523.25,659.25,783.99,659.25,587.33,698.46,880,698.46];
@@ -381,5 +392,10 @@ h1 span { color: #d982a0; }
   });
 })();
 </script>
+
+<!--sites-preview-theme:start-->
+<style data-sites-preview-theme></style>
+<script type="application/json" data-sites-preview-theme>{"appearance":"custom","primary":null,"secondary":null,"background":"#fffaf5","typography":"original","spacing":null,"roundness":null,"headingScale":null,"decorationOpacity":1}</script>
+<!--sites-preview-theme:end-->
 </body>
 </html>
