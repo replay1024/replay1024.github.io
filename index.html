@@ -1,91 +1,236 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>1</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生日快乐 · 给特别的你</title>
   <style>
+    :root {
+      --cream: #fff8f0;
+      --pink: #f5c9c9;
+      --rose: #d77b83;
+      --brown: #6f4b45;
+      --gold: #e9bd70;
+    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 0;
-      overflow: hidden; /* 防止滚动条出现 */
-      background: #f0f0f0;
-      font-family: "Microsoft YaHei", sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      color: var(--brown);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, #fff 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 70%, #fff 0 2px, transparent 3px),
+        linear-gradient(135deg, #fff8f0, #fde9e5 55%, #f8e7d0);
+      background-size: 90px 90px, 120px 120px, auto;
     }
-
-    .tip-box {
-      position: absolute;
-      width: 250px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 1000;
-      user-select: none;
+    .glow {
+      position: fixed;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: #fff2cc;
+      filter: blur(55px);
+      opacity: .55;
+      animation: breathe 5s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(90vw, 560px);
+      padding: 42px 32px 36px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.85);
+      border-radius: 28px;
+      background: rgba(255,255,255,.66);
+      box-shadow: 0 22px 70px rgba(151, 93, 84, .14);
+      backdrop-filter: blur(10px);
+      animation: appear 1s ease both;
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #bd8580;
+      font-size: 12px;
+      letter-spacing: .32em;
+    }
+    h1 {
+      margin: 0;
+      color: #c96f7a;
+      font-family: Georgia, "Songti SC", serif;
+      font-size: clamp(38px, 8vw, 58px);
+      font-weight: 500;
+      letter-spacing: .08em;
+    }
+    .subtitle { margin: 12px 0 24px; font-size: 15px; color: #94716a; }
+    .cake-wrap { height: 190px; display: grid; place-items: center; }
+    .cake {
+      position: relative;
+      width: 170px;
+      height: 130px;
+      animation: cakeBob 3s ease-in-out infinite;
+    }
+    .plate {
+      position: absolute; bottom: 0; left: 5px;
+      width: 160px; height: 13px; border-radius: 50%;
+      background: #f1d7c8; box-shadow: 0 5px 0 #e7c1b2;
+    }
+    .base {
+      position: absolute; bottom: 13px; left: 20px;
+      width: 130px; height: 55px;
+      border-radius: 9px 9px 15px 15px;
+      background: linear-gradient(90deg, #e9a4a0, #f7c8b9 48%, #eaa6a2);
+      box-shadow: inset 0 -7px rgba(190, 104, 107, .12);
+    }
+    .icing {
+      position: absolute; bottom: 55px; left: 15px;
+      width: 140px; height: 30px; border-radius: 50% 50% 12px 12px;
+      background: #fff0d8;
+    }
+    .icing::before, .icing::after {
+      content: ""; position: absolute; top: 15px;
+      width: 15px; height: 23px; border-radius: 0 0 10px 10px;
+      background: #fff0d8;
+    }
+    .icing::before { left: 24px; }
+    .icing::after { right: 28px; height: 16px; }
+    .berry {
+      position: absolute; z-index: 2; bottom: 77px;
+      width: 15px; height: 15px; border-radius: 50% 50% 45% 45%;
+      background: #c95768; box-shadow: inset -3px -2px rgba(110,30,45,.12);
+    }
+    .berry.one { left: 52px; } .berry.two { left: 79px; bottom: 83px; }
+    .berry.three { left: 106px; }
+    .candle {
+      position: absolute; z-index: 3; bottom: 82px; left: 80px;
+      width: 9px; height: 34px; border-radius: 4px;
+      background: repeating-linear-gradient(135deg, #fff8e9 0 5px, #e9a0a0 5px 9px);
+    }
+    .flame {
+      position: absolute; bottom: 115px; left: 78px;
+      width: 13px; height: 20px; border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: #ffc95e;
+      box-shadow: 0 0 18px 7px rgba(255, 195, 78, .35);
+      transform-origin: 70% 80%;
+      animation: flicker .8s ease-in-out infinite alternate;
+    }
+    .message {
+      max-width: 390px; margin: 8px auto 25px;
+      font-size: 15px; line-height: 2;
+      color: #80645e;
+    }
+    .message strong { color: #c96f7a; font-weight: 600; }
+    button {
+      border: 0; border-radius: 999px; padding: 13px 28px;
+      color: #fffaf7; background: linear-gradient(135deg, #df9296, #c96f7a);
+      font: inherit; font-size: 14px; letter-spacing: .08em;
+      cursor: pointer; box-shadow: 0 8px 20px rgba(201,111,122,.25);
+      transition: transform .2s, box-shadow .2s;
+    }
+    button:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(201,111,122,.32); }
+    button:active { transform: scale(.97); }
+    .signature { margin: 22px 0 0; color: #b18b82; font-family: Georgia, serif; font-style: italic; font-size: 13px; }
+    .floaty {
+      position: fixed; bottom: -40px; z-index: 0;
+      pointer-events: none; opacity: 0;
+      animation: floatUp var(--duration, 7s) linear forwards;
+      font-size: var(--size, 20px);
+    }
+    .sparkle {
+      position: fixed; z-index: 2; pointer-events: none;
+      animation: burst 1.5s ease-out forwards;
+    }
+    @keyframes appear { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes breathe { from { transform: scale(.85); } to { transform: scale(1.15); } }
+    @keyframes cakeBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes flicker { from { transform: rotate(-45deg) scale(.92); opacity: .85; } to { transform: rotate(-40deg) scale(1.08); opacity: 1; } }
+    @keyframes floatUp { 0% { opacity: 0; transform: translateY(0) rotate(0); } 12% { opacity: .8; } 85% { opacity: .65; } 100% { opacity: 0; transform: translateY(-115vh) rotate(25deg); } }
+    @keyframes burst { 0% { opacity: 0; transform: translate(0,0) scale(.3) rotate(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x),var(--y)) scale(1.2) rotate(35deg); } }
+    @media (max-width: 480px) {
+      .card { padding: 34px 22px 28px; }
+      .cake-wrap { height: 175px; }
+      .message { font-size: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
 <body>
+  <div class="glow" aria-hidden="true"></div>
+  <main class="card">
+    <p class="eyebrow">A LITTLE WISH FOR YOU</p>
+    <h1>生日快乐</h1>
+    <p class="subtitle">愿今天的你，被温柔与爱包围 ✧</p>
 
-<script>
-  const tips = [
-    '多喝水哦~', '保持微笑呀', '每天都要元气满满',
-    '记得吃水果', '保持好心情', '好好爱自己', '我想你了',
-    '梦想成真', '期待下一次见面',
-    '顺顺利利', '早点休息', '愿所有烦恼都消失',
-    '别熬夜', '今天过得开心嘛', '天冷了，多穿衣服'
-  ];
+    <div class="cake-wrap" aria-label="一只带着烛光的生日蛋糕">
+      <div class="cake">
+        <div class="plate"></div>
+        <div class="base"></div>
+        <div class="icing"></div>
+        <div class="berry one"></div>
+        <div class="berry two"></div>
+        <div class="berry three"></div>
+        <div class="candle"></div>
+        <div class="flame"></div>
+      </div>
+    </div>
 
-  const bgColors = [
-    'lightpink', 'skyblue', 'lightgreen', 'lavender',
-    'lightyellow', 'plum', 'coral', 'bisque', 'aquamarine',
-    'mistyrose', 'honeydew', 'lavenderblush', 'oldlace'
-  ];
+    <p class="message">
+      新的一岁，愿你眼里有光，心中有爱。<br>
+      愿所有美好如期而至，所有努力都有回响。<br>
+      <strong>平安喜乐，万事胜意，永远做快乐的自己。</strong>
+    </p>
 
-  const totalBoxes = 150;
+    <button id="wishButton" type="button">✨ 收下这份祝福</button>
+    <p class="signature">with love, always ♡</p>
+  </main>
 
-  function createTipBox() {
-    const box = document.createElement('div');
-    box.className = 'tip-box';
+  <script>
+    const symbols = ["♡", "✦", "✧", "♥", "✨", "🌸"];
+    const colors = ["#d77b83", "#e9bd70", "#e7a9a6", "#c9a8d8", "#f0b8a7"];
 
-    // 随机提示语和背景色
-    const tip = tips[Math.floor(Math.random() * tips.length)];
-    const bg = bgColors[Math.floor(Math.random() * bgColors.length)];
-    box.textContent = tip;
-    box.style.backgroundColor = bg;
-
-    // 随机位置（确保完全在视口内）
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-    const x = Math.random() * (windowWidth - 250);
-    const y = Math.random() * (windowHeight - 60);
-    box.style.left = `${x}px`;
-    box.style.top = `${y}px`;
-
-    document.body.appendChild(box);
-  }
-
-  // 创建多个弹窗
-  for (let i = 0; i < totalBoxes; i++) {
-    // 使用 setTimeout 模拟快速但非阻塞的创建
-    setTimeout(createTipBox, i * 60); // 每5毫秒一个
-  }
-
-  // 空格键关闭所有弹窗
-  document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space') {
-      const boxes = document.querySelectorAll('.tip-box');
-      boxes.forEach(box => box.remove());
-      // 可选：退出页面或提示
-      alert('程序已退出！');
-      // 或者直接关闭页面（部分浏览器会阻止）：
-      // window.close();
+    function makeFloatingSymbol() {
+      const el = document.createElement("span");
+      el.className = "floaty";
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.color = colors[Math.floor(Math.random() * colors.length)];
+      el.style.setProperty("--duration", (6 + Math.random() * 5) + "s");
+      el.style.setProperty("--size", (14 + Math.random() * 18) + "px");
+      document.body.appendChild(el);
+      el.addEventListener("animationend", () => el.remove());
     }
-  });
-</script>
 
+    // 柔和地飘起爱心与星星
+    setInterval(makeFloatingSymbol, 650);
+
+    // 点击按钮，绽放一圈小星星
+    document.getElementById("wishButton").addEventListener("click", (event) => {
+      const button = event.currentTarget;
+      const rect = button.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      for (let i = 0; i < 24; i++) {
+        const star = document.createElement("span");
+        star.className = "sparkle";
+        star.textContent = ["✦", "♡", "✨", "✧"][i % 4];
+        star.style.left = centerX + "px";
+        star.style.top = centerY + "px";
+        star.style.color = colors[i % colors.length];
+        const angle = (Math.PI * 2 * i) / 24;
+        const distance = 65 + Math.random() * 90;
+        star.style.setProperty("--x", Math.cos(angle) * distance + "px");
+        star.style.setProperty("--y", Math.sin(angle) * distance + "px");
+        document.body.appendChild(star);
+        star.addEventListener("animationend", () => star.remove());
+      }
+      button.textContent = "💗 愿你每天都开心";
+      setTimeout(() => { button.textContent = "✨ 收下这份祝福"; }, 2200);
+    });
+  </script>
 </body>
 </html>
