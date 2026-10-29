@@ -247,7 +247,7 @@ h1 span { color: #d982a0; }
   const canvas = document.getElementById('sky');
   const ctx = canvas.getContext('2d');
   let w = 0, h = 0, particles = [], running = false;
-  function resize() { const dpr = Math.min(window.devicePixelRatio || 1, 2); w = window.innerWidth; h = window.innerHeight; canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); canvas.style.width = w + 'px'; canvas.style.height = h + 'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function resize() { const dpr = Math.min(window.devicePixelRatio || 1, 2); w = document.documentElement.clientWidth || window.innerWidth; h = document.documentElement.clientHeight || window.innerHeight; canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); canvas.style.width = w + 'px'; canvas.style.height = h + 'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
   window.addEventListener('resize', resize); resize();
   const colors = ['#ef9eb8','#f6c5a1','#e8c97e','#f7dce4','#d8b9e8','#ffffff','#ffc8dd','#cdeac0','#bde0fe'];
   function burst(x, y, amount = 70) {
@@ -271,7 +271,17 @@ h1 span { color: #d982a0; }
       ctx.globalAlpha = Math.min(1, p.life / (window.innerWidth <= 560 ? 16 : 24)) * (p.twinkle ? (.55 + Math.abs(Math.sin(p.life * .28)) * .45) : 1);
       ctx.fillStyle = p.color;
       if (p.heart) {
-        ctx.font = `${p.size * (window.innerWidth <= 560 ? 8 : 7)}px serif`; ctx.fillText('♥', p.x, p.y);
+        const heartSize = p.size * (window.innerWidth <= 560 ? 7 : 7);
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.scale(heartSize / 16, heartSize / 16);
+        ctx.beginPath();
+        ctx.moveTo(0, 5);
+        ctx.bezierCurveTo(-11, -2, -7, -10, 0, -4);
+        ctx.bezierCurveTo(7, -10, 11, -2, 0, 5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
       } else {
         ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();
       }
