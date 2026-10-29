@@ -117,7 +117,7 @@ h1 span { color: #d982a0; }
 @keyframes heartbeat { 0%,100%{transform:scale(1)} 18%{transform:scale(1.14)} 34%{transform:scale(1)} 50%{transform:scale(1.08)} }
 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
 @keyframes rise { from{transform:translateY(0) rotate(0deg);opacity:0} 12%{opacity:.45} to{transform:translateY(-115vh) rotate(35deg);opacity:0} }
-@media (max-width: 560px) { main { padding: 6px 0; width: calc(100% - 20px); } .topline { letter-spacing: 2px; font-size: 9px; } .hero { padding: 10px 10px 8px; margin: 4px auto; } .eyebrow { margin-bottom: 6px; font-size: 10px; } h1 { font-size: clamp(27px, 7vw, 36px); line-height: 1.2; } .subtitle { margin-top: 6px; font-size: 11px; line-height: 1.45; } .envelope-gate { margin: 8px auto 12px; } .envelope-hint { font-size: 12px; margin-bottom: 8px; } .envelope-button { height: clamp(155px, 25vh, 205px); width: min(100%, 380px); } .envelope-seal { width: 44px; height: 44px; font-size: 23px; } .letter { padding: 10px 16px; } .letter-title { font-size: 17px; margin-bottom: 8px; } .letter p { font-size: 11.5px; line-height: 1.48; margin-bottom: 4px; } .letter .signature { margin-top: 6px; } .signature strong { font-size: 15px; } .wishline { font-size: 10px; letter-spacing: .2px; margin: 5px 0; } .tiny-caption { display: none; } .decor-strip { margin: 3px auto 5px; gap: 8px; } .decor-bubble { width: 34px; height: 34px; font-size: 18px; border-radius: 11px; } .actions { gap: 7px; margin-top: 5px; } .btn { padding: 8px 11px; font-size: 10px; } .sticker-gift { left: 0; bottom: 0; font-size: 27px; } .sticker-bear { right: 0; bottom: 0; font-size: 30px; } .sticker-cake { left: 1%; top: 1%; font-size: 20px; } .sticker-bunny { right: 1%; top: 1%; font-size: 21px; } .sticker-bow { left: 14%; top: 0; font-size: 20px; } .sticker-star { right: 14%; top: 0; font-size: 19px; } .footer { display: none; } }
+@media (max-width: 560px) { main { padding: 6px 0; width: calc(100% - 20px); } .topline { letter-spacing: 2px; font-size: 9px; } .hero { padding: 10px 10px 8px; margin: 4px auto; } .eyebrow { margin-bottom: 6px; font-size: 11px; } h1 { font-size: clamp(30px, 8vw, 39px); line-height: 1.25; letter-spacing: 2px; } .subtitle { margin-top: 8px; font-size: 13px; line-height: 1.7; letter-spacing: .4px; } .envelope-gate { margin: 8px auto 12px; } .envelope-hint { font-size: 13px; margin-bottom: 8px; letter-spacing: 1px; } .envelope-button { height: clamp(155px, 25vh, 205px); width: min(100%, 380px); } .envelope-seal { width: 40px; height: 40px; font-size: 21px; } .letter { padding: 12px 17px; } .letter-title { font-size: 18px; margin-bottom: 9px; } .letter p { font-size: 13px; line-height: 1.7; margin-bottom: 6px; } .letter .signature { margin-top: 8px; } .signature strong { font-size: 16px; } .wishline { font-size: 12px; line-height: 1.6; letter-spacing: .3px; margin: 7px 0; } .tiny-caption { display: none; } .decor-strip { margin: 3px auto 5px; gap: 8px; } .decor-bubble { width: 34px; height: 34px; font-size: 18px; border-radius: 11px; } .actions { gap: 7px; margin-top: 5px; } .btn { padding: 9px 12px; font-size: 12px; } .sticker-gift { left: 0; bottom: 0; font-size: 27px; } .sticker-bear { right: 0; bottom: 0; font-size: 30px; } .sticker-cake { left: 1%; top: 1%; font-size: 20px; } .sticker-bunny { right: 1%; top: 1%; font-size: 21px; } .sticker-bow { left: 14%; top: 0; font-size: 20px; } .sticker-star { right: 14%; top: 0; font-size: 19px; } .footer { display: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 
 /* Minimal white envelope only; preserve the original birthday palette */
@@ -242,14 +242,17 @@ h1 span { color: #d982a0; }
   const canvas = document.getElementById('sky');
   const ctx = canvas.getContext('2d');
   let w = 0, h = 0, particles = [], running = false;
-  function resize() { w = canvas.width = window.innerWidth * devicePixelRatio; h = canvas.height = window.innerHeight * devicePixelRatio; canvas.style.width = window.innerWidth + 'px'; canvas.style.height = window.innerHeight + 'px'; ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); w = window.innerWidth; h = window.innerHeight; }
+  function resize() { const dpr = Math.min(window.devicePixelRatio || 1, 2); w = window.innerWidth; h = window.innerHeight; canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); canvas.style.width = w + 'px'; canvas.style.height = h + 'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
   window.addEventListener('resize', resize); resize();
   const colors = ['#ef9eb8','#f6c5a1','#e8c97e','#f7dce4','#d8b9e8','#ffffff','#ffc8dd','#cdeac0','#bde0fe'];
   function burst(x, y, amount = 70) {
     for (let i = 0; i < amount; i++) {
       const a = Math.PI * 2 * i / amount + Math.random() * .12;
-      const speed = 1.2 + Math.random() * 3.6;
-      particles.push({x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:55+Math.random()*35,max:90,size:1.3+Math.random()*2.2,color:colors[Math.floor(Math.random()*colors.length)],heart:Math.random()<.2,twinkle:Math.random()<.3});
+      const speed = (1.2 + Math.random() * 3.6) * (window.innerWidth <= 560 ? .82 : 1);
+      const isHeart = Math.random() < (window.innerWidth <= 560 ? .42 : .2);
+      const heartColors = ['#ff4d6d','#ff85a1','#ff5fa2','#d982ff','#ffb3c6','#f06292','#ff6b6b','#c77dff','#f7a8d8'];
+      const particleColor = isHeart && window.innerWidth <= 560 ? heartColors[Math.floor(Math.random()*heartColors.length)] : colors[Math.floor(Math.random()*colors.length)];
+      particles.push({x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:55+Math.random()*35,max:90,size:(1.3+Math.random()*2.2)*(window.innerWidth <= 560 ? .9 : 1),color:particleColor,heart:isHeart,twinkle:Math.random()<.3});
     }
     if (!running) { running = true; requestAnimationFrame(tick); }
   }
@@ -327,7 +330,7 @@ h1 span { color: #d982a0; }
     const targetY = h * (.16 + Math.random() * .34);
     const startY = h + 8;
     const trailColor = colors[Math.floor(Math.random() * colors.length)];
-    const flight = Math.max(24, Math.min(48, Math.round((startY - targetY) / 12)));
+    const flight = Math.max(24, Math.min(48, Math.round((startY - targetY) / (window.innerWidth <= 560 ? 15 : 12))));
     let frame = 0;
     const trail = [];
     function riseRocket() {
@@ -346,15 +349,15 @@ h1 span { color: #d982a0; }
       while (trail.length && trail[0].life <= 0) trail.shift();
       if (frame < flight) requestAnimationFrame(riseRocket);
       else {
-        burst(x, targetY, 76 + Math.floor(Math.random() * 38));
+        burst(x, targetY, (window.innerWidth <= 560 ? 52 : 76) + Math.floor(Math.random() * (window.innerWidth <= 560 ? 24 : 38)));
         // A second, smaller ring adds a layered chrysanthemum effect.
-        window.setTimeout(() => burst(x + (Math.random() - .5) * 36, targetY + (Math.random() - .5) * 28, 24), 150);
+        window.setTimeout(() => burst(x + (Math.random() - .5) * 36, targetY + (Math.random() - .5) * 28, window.innerWidth <= 560 ? 16 : 24), 150);
       }
     }
     requestAnimationFrame(riseRocket);
   }
   // Occasional upward-launching fireworks, with a little extra celebration after interactions.
-  setInterval(() => { if (main.classList.contains('ready') && Math.random() > .18) launchFirework(); }, 2600);
+  setInterval(() => { if (main.classList.contains('ready') && Math.random() > (window.innerWidth <= 560 ? .38 : .18)) launchFirework(); }, window.innerWidth <= 560 ? 3400 : 2600);
   document.getElementById('heartBtn').addEventListener('click', () => {
     window.setTimeout(launchFirework, 180);
     window.setTimeout(launchFirework, 650);
