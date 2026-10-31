@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>送给公主的一份温柔</title>
+<title>公主，生日快乐</title>
 <style>
 :root {
   --site-primary: #f4b7c9;
@@ -46,18 +46,28 @@ h1 span { color: #d982a0; }
 .hero-heart.one { left: 7%; top: 25%; font-size: 27px; transform: rotate(-14deg); }
 .hero-heart.two { right: 8%; top: 15%; font-size: 21px; animation-delay: -1.5s; }
 .hero-heart.three { right: 15%; bottom: 0; font-size: 16px; animation-delay: -2s; }
-.sticker { position: absolute; z-index: 2; display: grid; place-items: center; padding: 0; border: 0; background: transparent; cursor: pointer; user-select: none; filter: drop-shadow(0 7px 8px #d9a9b52b); animation: stickerFloat 4s ease-in-out infinite; transition: filter .2s, scale .2s; }
-.sticker:hover, .sticker:focus-visible { scale: 1.18; filter: drop-shadow(0 9px 12px #d982a077); outline: none; }
-.sticker-gift { left: 2%; bottom: 5%; width: 70px; height: 70px; font-size: 43px; transform: rotate(-12deg); }
-.sticker-bear { right: 1%; bottom: 0; width: 76px; height: 76px; font-size: 48px; animation-delay: -1.4s; }
-.sticker-bow { left: 13%; top: -1%; font-size: 31px; animation-delay: -.7s; }
-.sticker-star { right: 13%; top: 2%; font-size: 27px; color: #e9bd68; animation-delay: -2s; }
-.sticker-cake { left: 4%; top: 9%; font-size: 30px; animation-delay: -1.8s; }
-.sticker-bunny { right: 4%; top: 7%; font-size: 32px; animation-delay: -.4s; }
 .corner-doodle { position: absolute; color: #e9b3c2; font-size: 23px; opacity: .8; animation: stickerFloat 3.6s ease-in-out infinite; }
 .corner-doodle.d1 { left: 24%; top: 8%; }
 .corner-doodle.d2 { right: 25%; bottom: 11%; animation-delay: -1s; }
 .corner-doodle.d3 { left: 15%; bottom: 17%; font-size: 17px; animation-delay: -2s; }
+/* 顶部专属装饰：只在标题上方出现，不增加多余按钮 */
+.top-decor { display:flex; justify-content:center; align-items:center; gap:clamp(13px,3vw,28px); margin:0 auto 5px; min-height:34px; }
+.top-decor span { display:inline-block; font-size:clamp(19px,3vw,27px); filter:drop-shadow(0 3px 4px #d9a9b533); animation:stickerFloat 3.6s ease-in-out infinite; }
+.top-decor span:nth-child(2n) { animation-delay:-1.1s; }
+.top-decor span:nth-child(3n) { animation-delay:-2s; }
+ .top-decor .icon-button { display:inline-grid; place-items:center; border:0; padding:0; margin:0; width:clamp(34px,4vw,42px); height:clamp(34px,4vw,42px); background:transparent; color:inherit; cursor:pointer; line-height:1; font-size:clamp(27px,3.2vw,34px); border-radius:12px; animation:stickerFloat 3.6s ease-in-out infinite; -webkit-tap-highlight-color:transparent; transition:filter .2s, transform .2s; }
+.top-decor .icon-button:hover { filter:drop-shadow(0 5px 8px #e99bb477); transform:translateY(-3px) scale(1.1); }
+.top-decor .icon-button:focus-visible { outline:2px solid #e8a9bc; outline-offset:4px; }
+.top-decor .icon-button.bear-hug { animation:bearHug .65s ease; }
+.top-decor .icon-button.icon-pop { animation:iconPop .65s ease; }
+@keyframes iconPop { 0%,100% { transform:scale(1) rotate(0); } 35% { transform:scale(1.45) rotate(-12deg); } 70% { transform:scale(.9) rotate(9deg); } }
+@keyframes bearHug { 0%,100% { transform:scale(1) rotate(0); } 25% { transform:scale(1.35) rotate(-12deg); } 55% { transform:scale(.9) rotate(10deg); } 80% { transform:scale(1.15) rotate(-5deg); } }
+.music-toggle { position:fixed; z-index:12; top:18px; right:18px; width:43px; height:43px; border:1px solid #edc5cf; border-radius:50%; background:#fffaf4eF; color:#c77d98; box-shadow:0 5px 16px #d9a9b533; font-size:25px; line-height:1; cursor:pointer; display:grid; place-items:center; transition:transform .2s, background .2s; }
+.music-toggle:hover { transform:translateY(-2px) scale(1.06); background:#fff0f4; }
+.music-toggle.playing { animation:musicPulse 1.5s ease-in-out infinite, musicRotate 3s linear infinite; background:#fff0f4; }
+@keyframes musicRotate { from { rotate:0deg; } to { rotate:360deg; } }
+@keyframes musicPulse { 0%,100% { box-shadow:0 0 0 0 #e9a8bd55; } 50% { box-shadow:0 0 0 8px #e9a8bd00; } }
+@media (max-width:560px) { .top-decor { gap:12px; margin-bottom:3px; } .top-decor span, .top-decor .icon-button { font-size:26px; } .top-decor .icon-button { width:34px; height:34px; } .music-toggle { top:10px; right:10px; width:38px; height:38px; font-size:23px; } }
 @keyframes stickerFloat { 0%,100% { translate: 0 0; rotate: -4deg; } 50% { translate: 0 -8px; rotate: 4deg; } }
 .letter { position: relative; max-width: 760px; width: 100%; margin: 0 auto; padding: clamp(10px, 1.8vh, 18px) clamp(22px, 5vw, 48px); border: 1px solid #f1dce0; border-radius: 5px; background: rgba(255,255,255,.76); box-shadow: 0 18px 55px #d9a9b51c, inset 0 0 0 5px #fffaf7; overflow: visible; flex: 0 0 auto; }
 .envelope-gate { width: min(100%, 540px); margin: 12px auto 18px; text-align: center; perspective: 1200px; flex: 0 0 auto; }
@@ -92,8 +102,8 @@ h1 span { color: #d982a0; }
 .letter::before { content: "✧"; position: absolute; top: 12px; left: 18px; color: #e8c6b2; font-size: 18px; }
 .letter::after { content: "✧"; position: absolute; right: 18px; bottom: 12px; color: #e8c6b2; font-size: 18px; }
 .letter-title { text-align: center; font-family: var(--site-font-heading); font-size: clamp(17px, 2vw, 21px); color: #ba7c8d; margin: 0 0 12px; }
-.letter p { font-family: var(--site-font-heading); font-size: clamp(12px, 1.45vw, 15px); line-height: 1.65; letter-spacing: .2px; margin: 0 0 6px; color: #80646a; }
-.letter .signature { text-align: right; margin: 10px 0 0; color: #bf8294; }
+.letter p { font-family: var(--site-font-heading); font-size: clamp(12px, 1.45vw, 15px); line-height: 1.75; letter-spacing: .2px; margin: 0 0 9px; color: #80646a; text-indent: 2em; }
+.letter .signature { text-align: right; text-indent: 0; margin: 10px 0 0; color: #bf8294; }
 .signature strong { display: block; font-weight: 500; font-size: clamp(16px, 1.8vw, 19px); margin-top: 3px; }
 .wishline { text-align: center; margin: clamp(8px, 1.5vh, 16px) 0; color: #bd8a91; font-family: var(--site-font-heading); letter-spacing: 2px; font-size: 14px; }
 .wishline span { color: #e6a0b5; margin: 0 8px; }
@@ -103,7 +113,6 @@ h1 span { color: #d982a0; }
 .btn.primary { background: #f5c4d1; color: #75475a; border-color: #f5c4d1; }
 .footer { text-align: center; font-size: 10px; color: #c4a4a7; letter-spacing: 2px; margin-top: 12px; }
 .decor-strip { display: flex; align-items: center; justify-content: center; gap: clamp(8px,2vw,20px); margin: 4px auto 12px; color: #c58d9b; }
-.decor-bubble { width: 48px; height: 48px; border-radius: 17px; display: grid; place-items: center; font-size: 25px; background: #fffdfb; border: 1px solid #f0dce0; box-shadow: 0 7px 20px #d9a9b51b; animation: stickerFloat 4.5s ease-in-out infinite; cursor: pointer; transition: transform .2s, box-shadow .2s; }
 .decor-bubble:hover, .decor-bubble:focus-visible { transform: translateY(-5px) scale(1.12); box-shadow: 0 10px 22px #d9a9b544; outline: 2px solid #e8bdc8; outline-offset: 2px; }
 .decor-bubble:nth-child(2n) { animation-delay: -1.3s; background: #fff2f5; }
 .decor-bubble:nth-child(3n) { animation-delay: -2.1s; background: #fff8e9; }
@@ -118,7 +127,7 @@ h1 span { color: #d982a0; }
 @keyframes heartbeat { 0%,100%{transform:scale(1)} 18%{transform:scale(1.14)} 34%{transform:scale(1)} 50%{transform:scale(1.08)} }
 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
 @keyframes rise { from{transform:translateY(0) rotate(0deg);opacity:0} 12%{opacity:.45} to{transform:translateY(-115vh) rotate(35deg);opacity:0} }
-@media (max-width: 560px) { main { padding: 6px 0; width: calc(100% - 20px); } .topline { letter-spacing: 2px; font-size: 9px; } .hero { padding: 10px 10px 8px; margin: 4px auto; } .eyebrow { margin-bottom: 6px; font-size: 11px; } h1 { font-size: clamp(30px, 8vw, 39px); line-height: 1.25; letter-spacing: 2px; } .subtitle { margin-top: 8px; font-size: 13px; line-height: 1.7; letter-spacing: .4px; } .envelope-gate { margin: 8px auto 12px; } .envelope-hint { font-size: 13px; margin-bottom: 8px; letter-spacing: 1px; } .envelope-button { height: clamp(155px, 25vh, 205px); width: min(100%, 380px); } .envelope-seal { width: 40px; height: 40px; font-size: 21px; } .letter { padding: 12px 17px; } .letter-title { font-size: 18px; margin-bottom: 9px; } .letter p { font-size: 13px; line-height: 1.7; margin-bottom: 6px; } .letter .signature { margin-top: 8px; } .signature strong { font-size: 16px; } .wishline { font-size: 12px; line-height: 1.6; letter-spacing: .3px; margin: 7px 0; } .tiny-caption { display: none; } .decor-strip { margin: 3px auto 5px; gap: 8px; } .decor-bubble { width: 34px; height: 34px; font-size: 18px; border-radius: 11px; } .actions { gap: 7px; margin-top: 5px; } .btn { padding: 9px 12px; font-size: 12px; } .sticker-gift { left: 0; bottom: 0; font-size: 27px; } .sticker-bear { right: 0; bottom: 0; font-size: 30px; } .sticker-cake { left: 1%; top: 1%; font-size: 20px; } .sticker-bunny { right: 1%; top: 1%; font-size: 21px; } .sticker-bow { left: 14%; top: 0; font-size: 20px; } .sticker-star { right: 14%; top: 0; font-size: 19px; } .footer { display: none; } }
+@media (max-width: 560px) { main { padding: 6px 0; width: calc(100% - 20px); } .topline { letter-spacing: 2px; font-size: 9px; } .hero { padding: 10px 10px 8px; margin: 4px auto; } .eyebrow { margin-bottom: 6px; font-size: 11px; } h1 { font-size: clamp(30px, 8vw, 39px); line-height: 1.25; letter-spacing: 2px; } .subtitle { margin-top: 8px; font-size: 13px; line-height: 1.7; letter-spacing: .4px; } .envelope-gate { margin: 8px auto 12px; } .envelope-hint { font-size: 13px; margin-bottom: 8px; letter-spacing: 1px; } .envelope-button { height: clamp(155px, 25vh, 205px); width: min(100%, 380px); } .envelope-seal { width: 40px; height: 40px; font-size: 21px; } .letter { padding: 12px 17px; } .letter-title { font-size: 18px; margin-bottom: 9px; } .letter p { font-size: 13px; line-height: 1.75; margin-bottom: 8px; } .letter .signature { margin-top: 8px; } .signature strong { font-size: 16px; } .wishline { font-size: 12px; line-height: 1.6; letter-spacing: .3px; margin: 7px 0; } .tiny-caption { display: none; } .footer { display: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 
 /* Minimal white envelope only; preserve the original birthday palette */
@@ -143,65 +152,49 @@ h1 span { color: #d982a0; }
 </head>
 <body>
 <div id="app">
-  <div class="loader" id="loader" aria-label="正在准备祝福">
+  <div class="loader" id="loader" aria-label="正在准备一份生日惊喜">
     <div class="loader-inner">
-      <div class="loader-heart">♡</div>
-      <div class="loader-title">正在为公主准备惊喜</div>
-      <div class="loader-sub">A LITTLE GIFT FULL OF LOVE</div>
+      <div class="loader-heart">♥</div>
+      <div class="loader-title">正在为公主加载幸福</div>
+      <div class="loader-sub">HAPPY BIRTHDAY</div>
       <div class="loader-track"><div class="loader-progress"></div></div>
     </div>
   </div>
   <div class="floaties" id="floaties" aria-hidden="true"></div>
   <canvas id="sky" aria-hidden="true"></canvas>
   <main id="main">
-    <div class="topline">A LITTLE NOTE FOR YOU</div>
+    <div class="top-decor"><button class="icon-button bear-button" id="bearButton" data-icon="bear" type="button" aria-label="摸摸小熊" title="摸摸小熊">🧸</button><button class="icon-button" data-icon="gift" type="button" aria-label="打开礼物" title="打开礼物">🎁</button><button class="icon-button" data-icon="bow" type="button" aria-label="蝴蝶结祝福" title="蝴蝶结祝福">🎀</button><button class="icon-button" data-icon="star" type="button" aria-label="点亮星星" title="点亮星星">⭐</button><button class="icon-button" data-icon="rabbit" type="button" aria-label="摸摸兔兔" title="摸摸兔兔">🐰</button></div>
+    <div class="topline">MAY YOU BE HAPPY, TODAY AND ALWAYS</div>
     <section class="hero">
       <span class="hero-heart one">♥</span><span class="hero-heart two">♡</span><span class="hero-heart three">✦</span>
-      <button class="sticker sticker-gift" type="button" data-sticker="gift" aria-label="打开礼物">🎁</button>
-      <button class="sticker sticker-bear" type="button" data-sticker="bear" aria-label="抱抱小熊">🧸</button>
-      <button class="sticker sticker-bow" type="button" data-sticker="bow" aria-label="蝴蝶结祝福">🎀</button>
-      <button class="sticker sticker-star" type="button" data-sticker="star" aria-label="点亮星星">⭐</button>
-      <button class="sticker sticker-cake" type="button" data-sticker="cake" aria-label="生日蛋糕">🧁</button>
-      <button class="sticker sticker-bunny" type="button" data-sticker="bunny" aria-label="兔兔祝福">🐰</button>
       <span class="corner-doodle d1" aria-hidden="true">✧</span><span class="corner-doodle d2" aria-hidden="true">♡</span><span class="corner-doodle d3" aria-hidden="true">✿</span>
-      <div class="eyebrow">致我最珍贵的女孩</div>
-      <h1>愿所有美好<br><span>都奔向公主</span></h1>
-      <p class="subtitle">把温柔写成一封信，把喜欢藏进星光里。<br>今天，也想把全世界的浪漫都送给你。</p>
+      <div class="eyebrow">你是人间烟火，也是我的山河万里</div>
+      <h1>公主<br><span>生日快乐</span></h1>
+      <p class="subtitle">想把所有没说出口的心动，都折进今天的风里，<br>轻轻吹到你身边</p>
     </section>
     <div class="envelope-gate" id="envelopeGate">
-      <p class="envelope-hint">一封写给公主的信 · 轻轻点击打开</p>
-      <button class="envelope-button" id="envelopeButton" type="button" aria-label="缓缓打开写给公主的信" aria-expanded="false">
+      <p class="envelope-hint">生日快乐，愿你岁岁无忧</p>
+      <button class="envelope-button" id="envelopeButton" type="button" aria-label="缓缓打开写给你的信" aria-expanded="false">
         <span class="envelope-back"></span>
-        <span class="envelope-letter" aria-hidden="true"><strong>致亲爱的小公主</strong><span>一份藏在信里的温柔 ♥</span></span>
+        <span class="envelope-letter" aria-hidden="true"><strong>写给公主的一封信</strong><span>趁今天，慢慢念给你听 ♥</span></span>
         <span class="envelope-flap"></span>
         <span class="envelope-front"></span>
         <span class="envelope-seal">♥</span>
       </button>
     </div>
     <section class="letter sealed-letter" id="loveLetter">
-      <h2 class="letter-title">亲爱的小公主：</h2>
-      <p>愿你眼里总有星星，身边总有鲜花，心里装着喜欢的事，也永远保留奔向快乐的勇气。</p>
-      <p>愿生活对你温柔一点，再温柔一点。烦恼有地方放下，委屈有人听见，每一个平凡的日子，也都能遇见一点小小的惊喜。</p>
-      <p>你不需要时时闪闪发光。开心的时候尽情大笑，累了的时候安心休息，偶尔做个任性的小朋友也没关系——因为你本来就值得被偏爱，值得所有真诚而热烈的美好。</p>
-      <p>愿你的每一个愿望，都能在未来某一天悄悄开花；愿你走过的路有花香，抬头的夜空有星光，而你的心中，永远有爱。</p>
-      <p class="signature">把最柔软的祝福送给你，<strong>永远闪闪发光的公主 ♥</strong></p>
+      <h2 class="letter-title">亲爱的公主：</h2>
+      <p>生日快乐，新的一岁。愿你三餐有味，四季有景，所行皆坦途，所遇皆良人。</p>
+      <p>新的一岁，愿你晨起有阳光，夜归有灯火；愿春风路过你的窗台，夏雨落在你的屋檐；愿你走过的每一条路都铺满温柔，遇见的每一个人都带着善意。日子不必匆忙，慢慢走，慢慢爱，把平凡的日子过成诗。</p>
+      <p>愿你被岁月温柔以待，被偏爱，被惦记，被好好爱着——不止今天，而是往后的每一天。</p>
+      <p class="signature">千言万语，归成一句——<strong>生日快乐，愿你岁岁无忧 ♥</strong></p>
     </section>
-    <div class="wishline"><span>♡</span> 愿你被爱包围，永远自由又灿烂 <span>♡</span></div>
-    <div class="decor-strip" aria-label="可爱的小装饰">
-      <div><button class="decor-bubble" type="button" data-sticker="gift" aria-label="礼物惊喜">🎁</button><div class="tiny-caption">A LITTLE GIFT</div></div>
-      <div><button class="decor-bubble" type="button" data-sticker="bear" aria-label="小熊抱抱">🐻</button><div class="tiny-caption">HUG FOR YOU</div></div>
-      <div><button class="decor-bubble" type="button" data-sticker="flower" aria-label="送你一朵花">🌷</button><div class="tiny-caption">BLOOM & SMILE</div></div>
-      <div><button class="decor-bubble" type="button" data-sticker="cake" aria-label="甜甜蛋糕">🍰</button><div class="tiny-caption">SWEET DAY</div></div>
-      <div><button class="decor-bubble" type="button" data-sticker="letter" aria-label="爱的信件">💌</button><div class="tiny-caption">WITH LOVE</div></div>
-    </div>
-    <div class="actions">
-      <button class="btn" id="heartBtn">♡ 收下一颗爱心</button>
-      <button class="btn primary" id="fireworksBtn" type="button">🎆 放一场烟花</button>
-      <button class="btn" id="musicBtn" aria-pressed="false">♫ 打开浪漫氛围</button>
-    </div>
-    <div class="footer">MADE WITH LOVE · FOR MY PRINCESS</div>
+    <div class="wishline"><span>♡</span> 愿你眼中有光，心中有暖，一生被爱，一生自由 <span>♡</span></div>
+    <div class="footer">HAPPY BIRTHDAY · MAY JOY FOLLOW YOU EVERYWHERE</div>
   </main>
-  <div id="toast" role="status">把今天的好运和快乐，都送给你 ♥</div>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="播放背景音乐" title="播放背景音乐">♫</button>
+  <audio id="bgMusic" src="music.mp3" loop preload="auto" autoplay></audio>
+  <div id="toast" role="status">生日快乐，公主。愿你今天，笑得很开心 ♥</div>
 </div>
 <script>
 (() => {
@@ -210,11 +203,78 @@ h1 span { color: #d982a0; }
   const envelopeButton = document.getElementById('envelopeButton');
   const envelopeGate = document.getElementById('envelopeGate');
   const loveLetter = document.getElementById('loveLetter');
+  const musicToggle = document.getElementById('musicToggle');
+  const bgMusic = document.getElementById('bgMusic');
+  const bearButton = document.getElementById('bearButton');
+  const iconMessages = {
+    gift: '备了一份小心意，愿你拆开它的时候，是开心的样子 🎁',
+    bow: '给你系上，愿你往后的日子，既体面，也舒心 🎀',
+    star: '愿这颗星替你守着，想做的事都顺顺利利 ⭐',
+    rabbit: '愿你身边总有人陪，把平常的日子也过得热气腾腾 🐰'
+  };
+  document.querySelectorAll('.top-decor .icon-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const isBear = button.dataset.icon === 'bear';
+      const animationClass = isBear ? 'bear-hug' : 'icon-pop';
+      button.classList.remove(animationClass);
+      void button.offsetWidth;
+      button.classList.add(animationClass);
+      const rect = button.getBoundingClientRect();
+      burst(rect.left + rect.width / 2, rect.top + rect.height / 2, isBear ? 30 : 18);
+      showToast(isBear ? '愿你被好好爱着，也被好好对待 ♥' : iconMessages[button.dataset.icon]);
+      window.setTimeout(() => button.classList.remove(animationClass), 750);
+      tryAutoplay();
+    });
+  });
+  let autoplayUnlocked = false;
+  async function tryAutoplay() {
+    if (!bgMusic.paused) return true;
+    try {
+      await bgMusic.play();
+      autoplayUnlocked = true;
+      musicToggle.classList.add('playing');
+      musicToggle.setAttribute('aria-label', '暂停背景音乐');
+      musicToggle.title = '暂停背景音乐';
+      return true;
+    } catch (error) {
+      // Browsers commonly block audible autoplay until the visitor interacts.
+      return false;
+    }
+  }
+  // Attempt automatic playback as soon as the page initializes; retry after the first user gesture if blocked.
+  tryAutoplay();
+  const unlockMusicOnce = () => {
+    if (!autoplayUnlocked) tryAutoplay();
+    window.removeEventListener('pointerdown', unlockMusicOnce);
+    window.removeEventListener('keydown', unlockMusicOnce);
+  };
+  window.addEventListener('pointerdown', unlockMusicOnce, { once: true });
+  window.addEventListener('keydown', unlockMusicOnce, { once: true });
+  bgMusic.addEventListener('play', () => musicToggle.classList.add('playing'));
+  bgMusic.addEventListener('pause', () => musicToggle.classList.remove('playing'));
+  musicToggle.addEventListener('click', async () => {
+    if (bgMusic.paused) {
+      try {
+        await bgMusic.play();
+        musicToggle.classList.add('playing');
+        musicToggle.textContent = '♫';
+        musicToggle.setAttribute('aria-label', '暂停背景音乐');
+        musicToggle.title = '暂停背景音乐';
+      } catch (error) {
+        showToast('请将 music.mp3 放在网页同一文件夹后再播放');
+      }
+    } else {
+      bgMusic.pause();
+      musicToggle.classList.remove('playing');
+      musicToggle.setAttribute('aria-label', '播放背景音乐');
+      musicToggle.title = '播放背景音乐';
+    }
+  });
   envelopeButton.addEventListener('click', () => {
     if (envelopeButton.classList.contains('opening')) return;
     envelopeButton.classList.add('opening');
     envelopeButton.setAttribute('aria-expanded', 'true');
-    showToast('给公主的温柔，正在慢慢展开 ♥');
+    showToast('愿信里的每一句，都能让你多开心一点 ♥');
     window.setTimeout(() => {
       envelopeButton.classList.add('opened');
       loveLetter.classList.remove('sealed-letter');
@@ -293,68 +353,10 @@ h1 span { color: #d982a0; }
   }
   const toast = document.getElementById('toast'); let toastTimer;
   function showToast(text) { toast.textContent = text; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2300); }
-  const stickerMessages = {
-    gift: ['🎁 礼物拆开啦：里面装着满满的偏爱！', 'gift'],
-    bear: ['🧸 送公主一个软乎乎的抱抱！', 'bear'],
-    bow: ['🎀 把今天的可爱和好运系在一起！', 'bow'],
-    star: ['⭐ 星星为你亮了一下，愿望会慢慢实现！', 'star'],
-    cake: ['🧁 甜甜的一天，当然要配一点甜！', 'cake'],
-    bunny: ['🐰 兔兔蹦来送祝福：每天都要开心！', 'bunny'],
-    flower: ['🌷 送你一朵花，愿你每天都明媚！', 'flower'],
-    letter: ['💌 偷偷递给公主一封爱的信！', 'letter']
-  };
-  document.querySelectorAll('[data-sticker]').forEach(item => item.addEventListener('click', () => {
-    const message = stickerMessages[item.dataset.sticker];
-    if (!message) return;
-    const rect = item.getBoundingClientRect();
-    burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 28);
-    showToast(message[0]);
-    item.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.28) rotate(-8deg)' }, { transform: 'scale(1)' }], { duration: 420, easing: 'ease-out' });
-  }));
-  document.getElementById('heartBtn').addEventListener('click', () => {
-    burst(w*.5, h*.43, 64);
-    showToast('把今天的好运和快乐，都送给你 ♥');
-  });
-  document.getElementById('fireworksBtn').addEventListener('click', () => {
-    if (!main.classList.contains('ready')) return;
-    const mobile = window.innerWidth <= 560;
-    const count = mobile ? 4 : 7;
-    for (let i = 0; i < count; i++) {
-      window.setTimeout(() => launchFirework(), i * (mobile ? 240 : 190));
-    }
-    showToast('为公主放一场烟花，愿每个愿望都闪闪发光！🎆');
-  });
-  // A small, original ambient tone made with the browser audio API; no external audio is loaded.
-  let audioCtx = null, melodyTimer = null, noteIndex = 0;
-  const notes = [523.25,659.25,783.99,659.25,587.33,698.46,880,698.46];
-  document.getElementById('musicBtn').addEventListener('click', () => {
-    const btn = document.getElementById('musicBtn');
-    if (melodyTimer) {
-      clearInterval(melodyTimer); melodyTimer = null;
-      if (audioCtx) audioCtx.suspend();
-      btn.textContent = '♫ 打开浪漫氛围'; btn.setAttribute('aria-pressed','false');
-      showToast('浪漫氛围已轻轻收起'); return;
-    }
-    try {
-      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-      audioCtx.resume();
-      const playNote = () => {
-        const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
-        osc.type = 'sine'; osc.frequency.value = notes[noteIndex++ % notes.length];
-        gain.gain.setValueAtTime(.0001, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(.045, audioCtx.currentTime + .04);
-        gain.gain.exponentialRampToValueAtTime(.0001, audioCtx.currentTime + .48);
-        osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + .5);
-      };
-      playNote(); melodyTimer = setInterval(playNote, 520);
-      btn.textContent = '♫ 收起浪漫氛围'; btn.setAttribute('aria-pressed','true');
-      showToast('送你一小段专属星光旋律 ♫');
-    } catch (e) { showToast('当前浏览器暂不支持氛围音效'); }
-  });
   // Colorful fireworks rise from the bottom, bloom into rings, and sprinkle heart-shaped sparks.
-  function launchFirework() {
+  function launchFirework(launchX) {
     if (!main.classList.contains('ready')) return;
-    const x = w * (.14 + Math.random() * .72);
+    const x = Number.isFinite(launchX) ? launchX : w * (.14 + Math.random() * .72);
     const targetY = h * (.16 + Math.random() * .34);
     const startY = h + 8;
     const trailColor = colors[Math.floor(Math.random() * colors.length)];
@@ -384,12 +386,20 @@ h1 span { color: #d982a0; }
     }
     requestAnimationFrame(riseRocket);
   }
-  // Occasional upward-launching fireworks, with a little extra celebration after interactions.
-  setInterval(() => { if (main.classList.contains('ready') && Math.random() > (window.innerWidth <= 560 ? .58 : .18)) launchFirework(); }, window.innerWidth <= 560 ? 4200 : 2600);
-  document.getElementById('heartBtn').addEventListener('click', () => {
-    window.setTimeout(launchFirework, 180);
-    window.setTimeout(launchFirework, 650);
-  });
+  // 每轮齐射固定 6 发：六枚烟花从不同水平位置几乎同时升空。
+  function launchSalvo() {
+    if (!main.classList.contains('ready')) return;
+    const mobile = window.innerWidth <= 560;
+    const margin = mobile ? w * .09 : w * .12;
+    const span = w - margin * 2;
+    for (let i = 0; i < 6; i++) {
+      const x = margin + span * (i / 5);
+      window.setTimeout(() => launchFirework(x), i * 75);
+    }
+  }
+  // 页面进入后先来一轮，之后定时进行六发齐射。
+  window.setTimeout(launchSalvo, 900);
+  window.setInterval(launchSalvo, window.innerWidth <= 560 ? 8500 : 7200);
 })();
 </script>
 
